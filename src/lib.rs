@@ -7,8 +7,8 @@ use noir_rs::{
 mod ffi {
     extern "Rust" {
         type Proof;
-        fn prove_swift(circuit_bytecode: String, initial_witness_vec_raw: Vec<i32>) -> Result<Proof, String>;
-        fn verify_swift(circuit_bytecode: String, proof: Proof) -> Result<bool, String>;
+        fn prove_swift(circuit_bytecode: String, initial_witness_vec_raw: Vec<i32>) -> Proof;
+        fn verify_swift(circuit_bytecode: String, proof: Proof) -> bool;
     }
 }
 
@@ -17,10 +17,7 @@ pub struct Proof {
     pub verification_key: Vec<u8>,
 }
 
-pub fn prove_swift(
-    circuit_bytecode: String,
-    initial_witness_vec_raw: Vec<i32>,
-) -> Result<Proof, String> {
+pub fn prove_swift(circuit_bytecode: String, initial_witness_vec_raw: Vec<i32>) -> Proof {
     let initial_witness_vec: Vec<FieldElement> = initial_witness_vec_raw
         .into_iter()
         .map(|f| f as i128)
@@ -31,16 +28,15 @@ pub fn prove_swift(
         initial_witness.insert(Witness(i as u32 + 1), witness);
     }
 
-    let (proof, verification_key) =
-        prove(circuit_bytecode, initial_witness).map_err(|e| e.to_string())?;
-    Ok(Proof {
+    let (proof, verification_key) = prove(circuit_bytecode, initial_witness).unwrap();
+    Proof {
         proof,
         verification_key,
-    })
+    }
 }
 
-pub fn verify_swift(circuit_bytecode: String, proof: Proof) -> Result<bool, String> {
-    verify(circuit_bytecode, proof.proof, proof.verification_key).map_err(|e| e.to_string())
+pub fn verify_swift(circuit_bytecode: String, proof: Proof) -> bool {
+    verify(circuit_bytecode, proof.proof, proof.verification_key).unwrap()
 }
 
 #[cfg(test)]
@@ -51,8 +47,8 @@ mod tests {
 
     #[test]
     fn test_prove_verify() {
-        let proof = prove_swift(String::from(BYTECODE), vec![1_i32, 10_i32]).unwrap();
-        let verdict = verify_swift(String::from(BYTECODE), proof).unwrap();
+        let proof = prove_swift(String::from(BYTECODE), vec![1_i32, 10_i32]);
+        let verdict = verify_swift(String::from(BYTECODE), proof);
         assert!(verdict);
     }
 }
