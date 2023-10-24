@@ -6,12 +6,10 @@ use noir_rs::{
 #[swift_bridge::bridge]
 mod ffi {
     extern "Rust" {
-        fn hello_rust() -> String;
+        type Proof;
+        fn prove_swift(circuit_bytecode: String, initial_witness_vec_raw: Vec<i32>) -> Result<Proof, String>;
+        fn verify_swift(circuit_bytecode: String, proof: Proof) -> Result<bool, String>;
     }
-}
-
-fn hello_rust() -> String {
-    String::from("Hello from Rust!")
 }
 
 pub struct Proof {
@@ -21,10 +19,11 @@ pub struct Proof {
 
 pub fn prove_swift(
     circuit_bytecode: String,
-    initial_witness_vec_raw: Vec<i128>,
+    initial_witness_vec_raw: Vec<i32>,
 ) -> Result<Proof, String> {
     let initial_witness_vec: Vec<FieldElement> = initial_witness_vec_raw
         .into_iter()
+        .map(|f| f as i128)
         .map(FieldElement::from)
         .collect();
     let mut initial_witness = WitnessMap::new();
@@ -52,7 +51,7 @@ mod tests {
 
     #[test]
     fn test_prove_verify() {
-        let proof = prove_swift(String::from(BYTECODE), vec![1_i128, 10_i128]).unwrap();
+        let proof = prove_swift(String::from(BYTECODE), vec![1_i32, 10_i32]).unwrap();
         let verdict = verify_swift(String::from(BYTECODE), proof).unwrap();
         assert!(verdict);
     }
