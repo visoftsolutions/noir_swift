@@ -1,4 +1,4 @@
-name: Rust
+name: Rust build&test ubuntu
 
 on:
   push:
@@ -11,11 +11,16 @@ env:
 
 jobs:
   build:
-
-    runs-on: self-hosted
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
     - name: Build
       run: cargo build -vv
     - name: Run tests

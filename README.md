@@ -1,6 +1,8 @@
 # SWIFT-BRIDGE for `noir_rs`
 
-![GitHub Workflow Status](https://github.com/visoftsolutions/noir_swift/actions/workflows/rust.yml/badge.svg)
+![GitHub Workflow Status Fedora](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@fedora.yml/badge.svg)
+![GitHub Workflow Status Ubuntu](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@ubuntu.yml/badge.svg)
+![GitHub Workflow Status Macos](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@macos.yml/badge.svg)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 
 Bridge the gap between Swift and the `noir_rs` library, offering Swift developers a seamless way to utilize the `noir_rs` library's zkSNARK proving scheme functionalities across iOS, macOS, WatchOS, and other Swift-compatible platforms.
