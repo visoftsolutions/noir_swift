@@ -1,8 +1,8 @@
-public func prove_swift<GenericIntoRustString: IntoRustString>(_ circuit_bytecode: GenericIntoRustString, _ initial_witness_vec_raw: RustVec<Int32>) -> Proof {
-    Proof(ptr: __swift_bridge__$prove_swift({ let rustString = circuit_bytecode.intoRustString(); rustString.isOwned = false; return rustString.ptr }(), { let val = initial_witness_vec_raw; val.isOwned = false; return val.ptr }()))
+public func prove_swift<GenericIntoRustString: IntoRustString>(_ circuit_bytecode: GenericIntoRustString, _ initial_witness_vec_raw: RustVec<Int32>) -> Optional<Proof> {
+    { let val = __swift_bridge__$prove_swift({ let rustString = circuit_bytecode.intoRustString(); rustString.isOwned = false; return rustString.ptr }(), { let val = initial_witness_vec_raw; val.isOwned = false; return val.ptr }()); if val != nil { return Proof(ptr: val!) } else { return nil } }()
 }
-public func verify_swift<GenericIntoRustString: IntoRustString>(_ circuit_bytecode: GenericIntoRustString, _ proof: Proof) -> Bool {
-    __swift_bridge__$verify_swift({ let rustString = circuit_bytecode.intoRustString(); rustString.isOwned = false; return rustString.ptr }(), {proof.isOwned = false; return proof.ptr;}())
+public func verify_swift<GenericIntoRustString: IntoRustString>(_ circuit_bytecode: GenericIntoRustString, _ proof: Proof) -> Optional<Bool> {
+    __swift_bridge__$verify_swift({ let rustString = circuit_bytecode.intoRustString(); rustString.isOwned = false; return rustString.ptr }(), {proof.isOwned = false; return proof.ptr;}()).intoSwiftRepr()
 }
 
 public class Proof: ProofRefMut {
