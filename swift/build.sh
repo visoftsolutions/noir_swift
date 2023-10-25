@@ -1,1 +1,1 @@
-swiftc -L ../target/debug/ -lnoir_swift -lbarretenberg -lstdc++ -lssl -lcrypto -import-objc-header bridging-header.h main.swift ../generated/noir_swift/noir_swift.swift ../generated/SwiftBridgeCore.swift -o main.run
+swiftc -L . -lnoir_swift -lbarretenberg -lstdc++ -lssl -lcrypto -import-objc-header bridging-header.h main.swift ../generated/noir_swift/noir_swift.swift ../generated/SwiftBridgeCore.swift -o main.run
