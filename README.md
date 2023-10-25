@@ -5,7 +5,7 @@
 ![GitHub Workflow Status Macos](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@macos.yml/badge.svg)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 
-Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on iOS, macOS, WatchOS, and other platforms supported by Swift.
+Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on `iOS`, `macOS`, `WatchOS`, and other platforms supported by Swift.
 
 ## 🚀 Features
 
