@@ -1,55 +1,57 @@
-# SWIFT-BRIDGE for `noir_rs`
+# Swift-Bridge for `noir_rs`
 
 ![GitHub Workflow Status Fedora](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@fedora.yml/badge.svg)
 ![GitHub Workflow Status Ubuntu](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@ubuntu.yml/badge.svg)
 ![GitHub Workflow Status Macos](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@macos.yml/badge.svg)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 
-Bridge the gap between Swift and the `noir_rs` library, offering Swift developers a seamless way to utilize the `noir_rs` library's zkSNARK proving scheme functionalities across iOS, macOS, WatchOS, and other Swift-compatible platforms.
+Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on iOS, macOS, WatchOS, and other platforms supported by Swift.
 
 ## 🚀 Features
 
-- 📱 Directly use `noir_rs` zkSNARK functionalities in Swift.
-- 🌉 Effortless interfacing between Swift and Rust.
-- 🔒 Secure zkSNARK proof generation and verification.
+- 📱 Native access to `noir_rs` zkSNARK tools within Swift.
+- 🌉 Smooth integration between Swift and Rust, making the bridge almost invisible.
+- 🔒 Ensured security with zkSNARK proof generation and verification.
 
-## 📦 Rust Build
+## Building & Testing
+
+### 📦 Building Rust
 
 ```bash
 cargo build
 ```
 
-## 🧪 Rust Testing
+### 🧪 Testing Rust
 
-Ensure the reliability and robustness of your bridge with the provided tests:
+To maintain the utmost confidence in the bridge, leverage the provided tests:
 
 ```bash
 cargo test
 ```
 
-## 📦 Swift Build
+### 📦 Building Swift
 
 ```bash
-# copy barretenberg lib to the swift directory
-cp target/debug/build/barretenberg-<hash>/out/lib/libbarretenberg.a swift/
-# copy noir_swift lib to the swift directory
+# Copy noir_swift lib to the swift directory
 cp target/debug/libnoir_swift.a swift/
+# Copy barretenberg lib to the swift directory
+cp target/debug/build/barretenberg-<hash>/out/lib/libbarretenberg.a swift/
 
 cd swift
 
-# compile swift project
+# Compile the Swift project
 ./build
 
-# run the program
+# Run the program
 ./main.run
 ```
 
-## 🎯 Quick Usage
+## 🎯 Usage
 
-We provide two main functions for the bridge:
+The bridge offers two main functions:
 
-1. **prove_swift**: Generates a zkSNARK proof using the given circuit bytecode and initial witness.
-2. **verify_swift**: Verifies a given zkSNARK proof against a circuit and its verification key.
+1. **prove_swift**: Create a zkSNARK proof using provided circuit bytecode and an initial witness.
+2. **verify_swift**: Authenticate a zkSNARK proof against its respective circuit and verification key.
 
 ```rust
 pub struct Proof {
@@ -63,4 +65,20 @@ fn verify_swift(circuit_bytecode: String, proof: Proof) -> Option<bool>;
 
 ## 🔍 Example
 
-Refer to the `tests` module for a comprehensive usage example:
+In this example, we're using a noir circuit that verifies if x is different from y:
+
+```swift
+let BYTECODE = "H4sIAAAAAAAA/7WTMRLEIAhFMYkp9ywgGrHbq6yz5v5H2JkdCyaxC9LgWDw+H9gBwMM91p7fPeOzIKdYjEeMLYdGTB8MpUrCmOohJJQkfYMwN4mSSy0ZC0VudKbCZ4cthqzVrsc/yw28dMZeWmrWerfBexnsxD6hJ7jUufr4GvyZFp8xpG0C14Pd8s/q29vPCBXypvmpDx7sD8opnfqIfsM1RNtxBQAA"
+
+let witness = RustVec<Int32>()
+witness.push(value: 1)
+witness.push(value: 2)
+
+guard let proof = prove_swift(BYTECODE, witness) else {
+    return false
+}
+
+let verdict = verify_swift(BYTECODE, proof) ?? false
+
+print(verdict)  // Outputs true upon successful verification
+```
