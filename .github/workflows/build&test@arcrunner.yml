@@ -1,0 +1,30 @@
+name: Rust build&test arcrunner
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [arc-runner-set]
+    
+    runs-on: ${{ matrix.os }}
+    container: docker.io/rust:latest
+
+    steps:
+    - name: Install
+      run: apt update && apt upgrade -y && apt install -y git build-essential cmake curl pkg-config libssl-dev libclang-dev
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    - name: Build
+      run: cargo build -vv
+    - name: Run tests
+      run: cargo test -vv
