@@ -1,6 +1,5 @@
 # Swift-Bridge for `noir_rs`
 
-![GitHub Workflow Status Fedora](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@fedora.yml/badge.svg)
 ![GitHub Workflow Status Ubuntu](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@ubuntu.yml/badge.svg)
 ![GitHub Workflow Status Macos](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@macos.yml/badge.svg)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
