@@ -1,9 +1,6 @@
 # Swift-Bridge for `noir_rs`
 
-![GitHub Workflow Status ArcRunner](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@arcrunner.yml/badge.svg)
-![GitHub Workflow Status Ubuntu](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@ubuntu.yml/badge.svg)
-![GitHub Workflow Status Macos](https://github.com/visoftsolutions/noir_swift/actions/workflows/build&test@macos.yml/badge.svg)
-![Version](https://img.shields.io/badge/version-0.19.3-blue)
+- ![Version](https://img.shields.io/badge/version-0.16.7-darkviolet)
 
 Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on `iOS`, `macOS`, `WatchOS`, and other platforms supported by Swift.
 
