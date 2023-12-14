@@ -1,6 +1,6 @@
 # Swift-Bridge for `noir_rs`
 
-- ![Version](https://img.shields.io/badge/version-0.16.7-darkviolet)
+- ![Version](https://img.shields.io/badge/version-0.19.4-darkviolet)
 
 Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on `iOS`, `macOS`, `WatchOS`, and other platforms supported by Swift.
 
