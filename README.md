@@ -1,81 +1,80 @@
-# Swift-Bridge for `noir_rs`
+# `noir_swift`: Swift-based zkSNARK Proving&Verifying tool for noir-lang
+
+Welcome to Swift-Bridge, a seamless connector between the Swift programming ecosystem and the `noir_rs` Rust library. This bridge is designed to provide Swift developers with easy and efficient access to `noir_rs`'s zkSNARK proving functionalities, making it highly applicable in iOS, macOS, WatchOS, and other platforms that support Swift.
 
 - ![Version](https://img.shields.io/badge/version-0.19.4-darkviolet)
 
-Swift-Bridge connects the Swift ecosystem to the `noir_rs` Rust library. This provides Swift developers with a streamlined experience when integrating `noir_rs`'s zkSNARK proving functionalities on `iOS`, `macOS`, `WatchOS`, and other platforms supported by Swift.
+## Key Highlights:
 
-## 🚀 Features
+- **Swift Integration**: Custom-built for Swift developers, enabling native access to zkSNARK tools within the Swift environment.
+- **Rust-Swift Bridge**: Offers a fluid connection between Swift and Rust, providing a smooth and efficient integration.
+- **Security Focused**: Ensures top-notch security with advanced zkSNARK proof generation and verification capabilities, integral for privacy and scalability in computing.
 
-- 📱 Native access to `noir_rs` zkSNARK tools within Swift.
-- 🌉 Smooth integration between Swift and Rust, making the bridge almost invisible.
-- 🔒 Ensured security with zkSNARK proof generation and verification.
+## Building & Testing Instructions:
 
-## Building & Testing
-
-### 📦 Building Rust
-
+### Building Rust Components:
 ```bash
 cargo build
 ```
 
-### 🧪 Testing Rust
-
-To maintain the utmost confidence in the bridge, leverage the provided tests:
-
+### Testing Rust Components:
+For high confidence in the bridge's reliability, utilize the included test suites:
 ```bash
 cargo test
 ```
 
-### 📦 Building Swift
-
+### Building Swift Components:
 ```bash
-# Copy noir_swift lib to the swift directory
+# Transfer noir_swift library to Swift directory
 cp target/debug/libnoir_swift.a swift/
-# Copy barretenberg lib to the swift directory
-cp target/debug/build/barretenberg-<hash>/out/lib/libbarretenberg.a swift/
 
 cd swift
 
-# Compile the Swift project
+# Compile Swift project
 ./build
 
-# Run the program
+# Execute the program
 ./main.run
 ```
 
-## 🎯 Usage
+## Usage:
 
-The bridge offers two main functions:
+Swift-Bridge mainly provides two crucial functions:
 
-1. **prove_swift**: Create a zkSNARK proof using provided circuit bytecode and an initial witness.
-2. **verify_swift**: Authenticate a zkSNARK proof against its respective circuit and verification key.
+1. **Prove in Swift**: Create a zkSNARK proof using provided circuit bytecode and initial witness.
+2. **Verify in Swift**: Authenticate a zkSNARK proof against its respective circuit and verification key.
 
 ```rust
-pub struct Proof {
-    pub proof: Vec<u8>,
-    pub verification_key: Vec<u8>,
+struct Proof {
+    proof: Vec<u8>,
+    verification_key: Vec<u8>,
 }
 
 fn prove_swift(circuit_bytecode: String, initial_witness_vec_raw: Vec<i32>) -> Option<Proof>;
 fn verify_swift(circuit_bytecode: String, proof: Proof) -> Option<bool>;
 ```
 
-## 🔍 Example
+## Example:
 
-In this example, we're using a noir circuit that verifies if x is different from y:
+Here's an example using a noir circuit to verify if x is different from y:
 
 ```swift
-let BYTECODE = "H4sIAAAAAAAA/7WTMRLEIAhFMYkp9ywgGrHbq6yz5v5H2JkdCyaxC9LgWDw+H9gBwMM91p7fPeOzIKdYjEeMLYdGTB8MpUrCmOohJJQkfYMwN4mSSy0ZC0VudKbCZ4cthqzVrsc/yw28dMZeWmrWerfBexnsxD6hJ7jUufr4GvyZFp8xpG0C14Pd8s/q29vPCBXypvmpDx7sD8opnfqIfsM1RNtxBQAA"
+let BYTECODE = "<Your Noir Bytecode>"
 
 let witness = RustVec<Int32>()
-witness.push(value: 1)
-witness.push(value: 2)
+witness.push(value: 1) // x value
+witness.push(value: 2) // y value
 
 guard let proof = prove_swift(BYTECODE, witness) else {
     return false
 }
 
 let verdict = verify_swift(BYTECODE, proof) ?? false
-
-print(verdict)  // Outputs true upon successful verification
+print(verdict)  // Outputs true if successful verification
 ```
+
+## Future Developments:
+
+We are constantly working to improve the Swift-Bridge, focusing on enhancing its compatibility with a broader range of Swift-supported platforms and streamlining its integration into Swift-based projects. 
+
+Stay tuned for more updates and advancements in bridging Swift with the world of zkSNARKs!
